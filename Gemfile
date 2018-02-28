@@ -15,6 +15,7 @@ gem 'pg', '0.19.0'
 gem 'shopify_api', '~> 4.9'
 gem 'dotenv', '~> 2.2', '>= 2.2.1'
 gem 'rake', '~> 12.3'
+gem 'httparty'
 
 group :development, :test do
   gem 'pry'
