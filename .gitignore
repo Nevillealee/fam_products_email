@@ -1,0 +1,6 @@
+.env
+/config/database.yml
+/config/puma.rb
+/log/*
+/tmp/*
+scratch.json
