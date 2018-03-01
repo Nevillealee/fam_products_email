@@ -2,7 +2,7 @@ source "https://rubygems.org"
 ruby '2.4.1'
 
 # Server
-gem 'sinatra', '~> 2.0', '>= 2.0.1'
+gem 'sinatra', '~> 2.0', '>= 2.0.1', require: 'sinatra/base'
 gem 'sinatra-contrib', '~> 2.0', '>= 2.0.1'
 gem 'puma', '~> 3.11'
 
@@ -10,6 +10,7 @@ gem 'puma', '~> 3.11'
 gem 'activesupport', '~> 5.1', '>= 5.1.5'
 gem 'sinatra-activerecord', '~> 2.0', '>= 2.0.13'
 gem 'pg', '0.19.0'
+gem 'activerecord', require: 'active_record'
 
 # Miscellaneous
 gem 'shopify_api', '~> 4.9'

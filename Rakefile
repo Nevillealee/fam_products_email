@@ -1,11 +1,6 @@
-require 'sinatra/activerecord'
-require "sinatra/activerecord/rake"
-require './models/subscription'
-require './models/subscription_cache'
-require './models/customer'
-require './models/customer_cache'
+require_relative 'config/environment'
 require 'resque/tasks'
-require 'pry'
+require "sinatra/activerecord/rake"
 
 desc 'do full or partial pull of subscription table and associated tables and add to DB'
 task :subscription_pull, [:args] do |t, args|
@@ -34,6 +29,7 @@ task :save_customer_data, [:size] do |_t, size|
 end
 
 namespace :db do
+  desc 'some description'
   task :load_config do
     require "./app"
   end
