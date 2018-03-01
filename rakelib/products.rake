@@ -1,6 +1,3 @@
-require_relative 'config/environment'
-require "sinatra/activerecord/rake"
-
 namespace :test do
   desc 'some description'
   task :products do
