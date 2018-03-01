@@ -1,6 +1,6 @@
 namespace :test do
-  desc 'some description'
+  desc 'GET request for ellie.com products + variants'
   task :products do
-      SHOPIFY_INIT.pull_products
+      PRODUCT.pull
   end
 end

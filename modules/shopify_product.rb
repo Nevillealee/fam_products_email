@@ -1,7 +1,7 @@
-module SHOPIFY_INIT
+module PRODUCT
   ACTIVE_PRODUCT = []
 
-  def self.init_actives
+  def self.init
     ShopifyAPI::Base.site =
       "https://#{ENV['ACTIVE_API_KEY']}:#{ENV['ACTIVE_API_PW']}@#{ENV['ACTIVE_SHOP']}.myshopify.com/admin"
     active_product_count = ShopifyAPI::Product.count
@@ -23,8 +23,8 @@ module SHOPIFY_INIT
     ACTIVE_PRODUCT.flatten!
   end
 
-  def self.pull_products
-    init_actives
+  def self.pull
+    init
     p 'calling pull products'
     ACTIVE_PRODUCT.each do |object|
       p "saving: #{object['title']}"
@@ -33,5 +33,6 @@ module SHOPIFY_INIT
         ProductVariant.find_or_initialize_by(id: variant['id']).update(variant)
       end
     end
+    p 'task complete'
   end
 end
