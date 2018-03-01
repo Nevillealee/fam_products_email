@@ -1,4 +1,4 @@
-require 'sinatra/activerecord'
+require_relative 'config/environment'
 require "sinatra/activerecord/rake"
 
 namespace :email do
@@ -9,7 +9,15 @@ namespace :email do
 end
 
 namespace :db do
+  desc 'some description'
   task :load_config do
     require "./app"
+  end
+end
+
+namespace :test do
+  desc 'some description'
+  task :products do
+      SHOPIFY_INIT.pull_products
   end
 end

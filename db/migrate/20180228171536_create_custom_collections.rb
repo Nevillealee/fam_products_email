@@ -1,13 +1,18 @@
 class CreateCustomCollections < ActiveRecord::Migration[5.1]
   def change
-    create_table :custom_collections do |t|
-      t.string :site_id #id on api, renamed because of active record 
+    create_table :shopify_custom_collections, id: false do |t|
+      t.bigint :id, null: false, primary_key: true
+      t.text :body_html
       t.string :handle
-      t.string :title
-      t.string :body_html
+      t.string :image
+      t.json :metafield
+      t.boolean :published
+      t.timestamp :published_at
+      t.string :published_scope
       t.string :sort_order
       t.string :template_suffix
-      t.string :published_scope
+      t.string :title
+      t.timestamp :updated_at
     end
   end
 end

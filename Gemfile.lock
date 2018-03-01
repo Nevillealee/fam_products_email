@@ -71,6 +71,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord
   activesupport (~> 5.1, >= 5.1.5)
   dotenv (~> 2.2, >= 2.2.1)
   httparty
