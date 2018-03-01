@@ -14,9 +14,10 @@ gem 'activerecord', require: 'active_record'
 
 # Miscellaneous
 gem 'shopify_api', '~> 4.9'
+gem 'httparty', '~> 0.16.0'
 gem 'dotenv', '~> 2.2', '>= 2.2.1'
 gem 'rake', '~> 12.3'
-gem 'httparty'
+gem 'resque', '~> 1.27', '>= 1.27.4'
 
 group :development, :test do
   gem 'pry'
