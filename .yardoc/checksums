@@ -1,7 +1,0 @@
-config/environment.rb 6276f0b39fdd8dfbd8c3aff8c2c9c876978de2f7
-db/schema.rb ba595ddda391ee023af770a3a29a0c99eb449420
-models/collect.rb 16c3c470fa9fa2d4c7aad5e02f9cf133bcf686bf
-models/customcollection.rb 6be2b9dcb109cacbd59ea118c0d524f9409cc9ed
-models/product.rb 2f29b908f7ef5b1602afa3d01164d02bb3de0029
-models/productvariant.rb 85c5ae55f126448dc43febb0a921be15536976a0
-modules/shopify_product.rb f7551e9cc58f4d873434df624f58521be9c6957a
