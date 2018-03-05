@@ -2,7 +2,7 @@ require_relative 'config/environment'
 require 'resque/tasks'
 require "sinatra/activerecord/rake"
 
-desc 'do full or partial pull of subscription table and associated tables and add to DB'
+desc 'do full pull of subscription table and associated tables and add to DB'
 task :subscription_pull, [:args] do |t, args|
   SubscriptionCache.new.handle_subscriptions(*args)
 end
@@ -32,6 +32,11 @@ namespace :customer_service do
   desc 'creates a csv with customer_email, bad_order_number, correct_product_title, top_size, leggings_size, and bra_size'
   task :create_bad_orders_csv do |_t|
     BadOrders.new.create_csv
+  end
+
+  desc 'creates current inventory vs subscriptions csv'
+  task :inventory_difference_csv do |_t|
+    InventoryDifference.new.create_csv
   end
 end
 

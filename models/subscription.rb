@@ -11,6 +11,7 @@ class Subscription < ActiveRecord::Base
 
   belongs_to :customer
   has_many :line_items, class_name: 'SubLineItem'
+  
   # has_many :order_line_items, class_name: 'OrderLineItemsFixed'
   # has_many :orders, through: :order_line_items
   # has_and_belongs_to_many :charges, join_table: 'charge_fixed_line_items'
