@@ -56,7 +56,7 @@ class PullSubscription
       puts "All done deleting and resetting subscription and associated tables"
       num_subs = background_count_subscriptions(header_info)
       puts "We have #{num_subs} full subscriptions"
-      
+
       background_load_full_subs(sleep_recharge, num_subs, header_info, uri)
     else
       puts "Can't understand option #{option_value} doing nothing"
