@@ -6,3 +6,6 @@
 scratch.json
 customers.csv
 dump.rdb
+saved_bad_orders.csv
+bad_orders_complete_data.csv
+inventory_difference.csv
