@@ -17,10 +17,12 @@ class InventoryDifference
     }.freeze
 
   def create_csv
-    CSV.open("inventory_difference_refactor.csv", "a+") do |csv|
+    CSV.open("inventory_difference.csv", "a+") do |csv|
+      csv << ['Product and Size', 'Inventory', 'Subscriptions'] # Header
       PRODUCT_IDS.each do |product_id|
+        csv << [Product.find(product_id).title]
         custom_collection(product_id).products.each do |collection_product|
-          csv << current_inventory_quantity_per_variant_row(collection_product, product_id)
+          insert_rows(collection_product, product_id, csv)
         end
         csv << [] # empty row separator
       end
@@ -33,9 +35,13 @@ class InventoryDifference
     CustomCollection.find(PRODUCT_COLLECTION_MAP[product_id.to_s])
   end
 
-  def current_inventory_quantity_per_variant_row(collection_product, product_id)
-    collection_product.variants.map do |variant|
-      "#{collection_product.title}: #{variant.title}, inventory_quantity: #{variant.inventory_quantity}, subscriptions: #{subscription_quantity(product_id, variant.title, collection_product)}"
+  def insert_rows(collection_product, product_id, csv)
+    rows = collection_product.variants.map do |variant|
+      ["#{collection_product.title}: #{variant.title}", variant.inventory_quantity, subscription_quantity(product_id, variant.title, collection_product)]
+    end
+
+    rows.each do |row|
+      csv << row
     end
   end
 
@@ -56,33 +62,6 @@ class InventoryDifference
 
     subscription_counts_per_size[product_type]
   end
-
-  # def active_subscriptions_per_size_per_product_type_row(product_id)
-  #   [
-  #     subscription_quantity_per_size(product_id, 'XS'),
-  #     subscription_quantity_per_size(product_id, 'S'),
-  #     subscription_quantity_per_size(product_id, 'M'),
-  #     subscription_quantity_per_size(product_id, 'L'),
-  #     subscription_quantity_per_size(product_id, 'XL')
-  #   ]
-  # end
-
-  # def subscription_quantity_per_size(product_id, size)
-  #   subscription_counts_per_size = product_counts
-  #   subscriptions = Subscription.where(shopify_product_id: product_id).select(&:active?)
-  #
-  #   subscriptions.each do |subscription|
-  #     subscription_counts_per_size["leggings"] += 1 if subscription.sizes["leggings"] == size
-  #     subscription_counts_per_size["sports-bra"] += 1 if subscription.sizes["sports-bra"] == size
-  #     subscription_counts_per_size["tops"] += 1 if subscription.sizes["tops"] == size
-  #   end
-  #
-  #   subscription_counts_per_size.to_a
-  #                               .map { |count| count.join(' ') }
-  #                               .flatten
-  #                               .join(', ')
-  #                               .prepend("#{size} ACTIVE SUBSCRIPTIONS: ")
-  # end
 
   def product_counts
     {
