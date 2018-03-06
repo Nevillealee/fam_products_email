@@ -14,26 +14,26 @@ module EMAIL
     mail.subject = "Current collections inventory/subscription count as of #{current_date}"
 
     personalization1 = Personalization.new
-    personalization.add_to(Email.new(email: 'CWestbrook@fambrands.com', name: 'Crystal Westbrook'))
+    personalization1.add_to(Email.new(email: 'CWestbrook@fambrands.com', name: 'Crystal Westbrook'))
     mail.add_content(Content.new(type: 'text/html', value: '<html><body>Please find ellie.com weekly inventory report attached</body></html>'))
     mail.add_personalization(personalization1)
 
     personalization2 = Personalization.new
-    personalization.add_to(Email.new(email: 'TTiao@fambrands.com', name: 'Tracy Tiao'))
+    personalization2.add_to(Email.new(email: 'TTiao@fambrands.com', name: 'Tracy Tiao'))
     mail.add_content(Content.new(type: 'text/html', value: '<html><body>Please find ellie.com weekly inventory report attached</body></html>'))
     mail.add_personalization(personalization2)
 
     personalization3 = Personalization.new
-    personalization.add_to(Email.new(email: 'Evillegas@Fambrands.com', name: 'Elvira Villegas'))
+    personalization3.add_to(Email.new(email: 'Evillegas@Fambrands.com', name: 'Elvira Villegas'))
     mail.add_content(Content.new(type: 'text/html', value: '<html><body>Please find ellie.com weekly inventory report attached</body></html>'))
     mail.add_personalization(personalization3)
 
     attachment = Attachment.new
-    attachment.content = Base64.strict_encode64(File.open(fpath, 'rb').read)
-    attachment.type = 'application/vnd.oasis.opendocument.spreadsheet'
-    attachment.filename = fname
+    attachment.content = Base64.strict_encode64(File.open('./inventory_difference.csv', 'rb').read)
+    attachment.type = 'text/csv'
+    attachment.filename = 'inventory_difference.csv'
     attachment.disposition = 'attachment'
-    attachment.content_id = 'test Sheet'
+    attachment.content_id = 'Csv Sheet'
     mail.add_attachment(attachment)
 
     sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'], host: 'https://api.sendgrid.com')
