@@ -1,4 +1,4 @@
-namespace :test do
+namespace :ellie do
   desc 'GET request for ellie.com custom collections'
   task :custom_collections do
       CUSTOMCOLLECTION.pull
